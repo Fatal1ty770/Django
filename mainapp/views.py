@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import ProductCategory, Product
 
 def products(request):
     links_menu = {'links': [
@@ -11,3 +11,11 @@ def products(request):
     ]}
     return render(request, 'products.html',context=links_menu )
 # context=links_menu
+
+def main(request):
+    title = 'главная'
+
+    products = Product.objects.all()[:4]
+
+    content = {'title': title, 'products': products}
+    return render(request, 'mainapp/index.html', content)
